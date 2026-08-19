@@ -1,4 +1,4 @@
-/* ─── Design Tokens: Deep Space Nebula (Scheme 10) ─── */
+/* ─── Design Tokens: Deep Space Nebula (Scheme 10) — master-dev standard ─── */
 :root {
   --bg-deep: #030712;
   --primary: #3B82F6;
@@ -13,16 +13,26 @@
   --text-dim: #475569;
   --surface: hsla(0, 0%, 100%, 0.04);
   --border: hsla(0, 0%, 100%, 0.08);
+  --border-focus: rgba(59, 130, 246, 0.5);
+  
+  /* 8pt spatial grid variables */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
 }
 
 /* ─── Shared Design Token Classes ─── */
 .glass-card {
-  background: hsla(220, 24%, 7%, 0.82);
+  background: hsla(220, 24%, 7%, 0.85);
   backdrop-filter: blur(32px);
   -webkit-backdrop-filter: blur(32px);
   border: 1px solid var(--border);
   border-radius: 1rem;
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.65), inset 0 1px 0 hsla(0, 0%, 100%, 0.09);
+  transition: border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .gradient-border {
@@ -64,8 +74,8 @@
   background-clip: text;
 }
 
-/* ─── Multi-stop Radial Mesh Gradient ─── */
-.mesh-bg {
+/* ─── Multi-stop Radial Mesh Gradient (master-dev standard) ─── */
+.gradient-mesh-bg, .mesh-bg {
   background:
     radial-gradient(ellipse at 0% 0%, rgba(59, 130, 246, 0.14) 0%, transparent 50%),
     radial-gradient(ellipse at 100% 100%, rgba(139, 92, 246, 0.10) 0%, transparent 50%),
@@ -143,7 +153,7 @@ canvas {
   50% { transform: scale(1.35); opacity: 0.45; }
 }
 
-/* ─── FPS Counter ─── */
+/* ─── FPS & Performance Metric HUD ─── */
 #fps-counter {
   position: fixed;
   top: 20px;
@@ -155,14 +165,15 @@ canvas {
   font-weight: 600;
   color: var(--accent-emerald);
   padding: 4px 14px;
-  background: hsla(220, 24%, 7%, 0.7);
-  border: 1px solid hsla(16, 185, 129, 0.2);
+  background: hsla(220, 24%, 7%, 0.85);
+  border: 1px solid hsla(16, 185, 129, 0.25);
   border-radius: 6px;
   letter-spacing: 0.1em;
   pointer-events: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
-/* ─── Top Action Toolbar ─── */
+/* ─── Top Action Toolbar (Pro Max 8pt layout) ─── */
 #top-toolbar {
   position: fixed;
   top: 20px;
@@ -173,14 +184,15 @@ canvas {
   gap: 6px;
   padding: 6px 10px;
   flex-wrap: wrap;
-  max-width: 680px;
+  max-width: 720px;
   justify-content: flex-end;
 }
 .tool-btn {
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 5px 10px;
+  min-height: 32px;
+  padding: 5px 11px;
   border-radius: 0.55rem;
   border: 1px solid hsla(0, 0%, 100%, 0.08);
   background: hsla(0, 0%, 100%, 0.04);
@@ -190,7 +202,7 @@ canvas {
   font-weight: 600;
   letter-spacing: 0.03em;
   cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
   white-space: nowrap;
 }
 .tool-btn:hover {
@@ -198,6 +210,10 @@ canvas {
   border-color: var(--primary);
   color: var(--text-primary);
   box-shadow: 0 0 14px rgba(59, 130, 246, 0.25);
+  transform: translateY(-1px);
+}
+.tool-btn:active {
+  transform: scale(0.97);
 }
 .tool-btn.active {
   background: rgba(59, 130, 246, 0.2);
@@ -256,13 +272,17 @@ canvas {
   padding: 6px 12px;
   border-radius: 0.55rem;
   cursor: pointer;
-  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
   border: 1px solid transparent;
   white-space: nowrap;
 }
 .nav-item:hover {
   background: hsla(0, 0%, 100%, 0.06);
   border-color: hsla(0, 0%, 100%, 0.1);
+  transform: translateX(2px);
+}
+.nav-item:active {
+  transform: scale(0.98);
 }
 .nav-item.active {
   background: hsla(0, 0%, 100%, 0.1);
@@ -306,11 +326,11 @@ canvas {
   top: 50%;
   transform: translateY(-50%) translateX(24px);
   z-index: 100;
-  width: 330px;
+  width: 340px;
   padding: 24px;
   opacity: 0;
   pointer-events: none;
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   max-height: 84vh;
   overflow-y: auto;
 }
@@ -373,6 +393,7 @@ canvas {
 }
 .info-act-btn {
   flex: 1;
+  min-height: 36px;
   padding: 8px;
   border-radius: 0.5rem;
   background: hsla(0, 0%, 100%, 0.05);
@@ -383,12 +404,16 @@ canvas {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .info-act-btn:hover {
-  background: rgba(59, 130, 246, 0.15);
+  background: rgba(59, 130, 246, 0.18);
   border-color: var(--primary);
   color: var(--text-primary);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.25);
+}
+.info-act-btn:active {
+  transform: scale(0.97);
 }
 .info-moons-title {
   font-size: 9px;
@@ -444,11 +469,11 @@ canvas {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(3, 7, 18, 0.75);
-  backdrop-filter: blur(16px);
+  background: rgba(3, 7, 18, 0.8);
+  backdrop-filter: blur(20px);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 #compare-modal.active {
   opacity: 1;
@@ -499,12 +524,16 @@ canvas {
   font-weight: 600;
   outline: none;
 }
+.compare-select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
+}
 .compare-stat-row {
   display: flex;
   justify-content: space-between;
   font-size: 11px;
   border-bottom: 1px solid hsla(0, 0%, 100%, 0.04);
-  padding: 5px 0;
+  padding: 6px 0;
 }
 .compare-stat-label { color: var(--text-dim); }
 .compare-stat-val { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--text-primary); }
@@ -522,7 +551,7 @@ canvas {
   gap: 18px;
   opacity: 0;
   pointer-events: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 #distance-hud.active {
   opacity: 1;
@@ -555,7 +584,7 @@ canvas {
 }
 .dist-arrow { color: var(--primary); }
 
-/* ─── Bottom Controls Bar ─── */
+/* ─── Bottom Controls Bar (Pro Max Spatial Grid) ─── */
 #controls {
   position: fixed;
   bottom: 20px;
@@ -577,7 +606,7 @@ canvas {
 #controls input[type=range] {
   -webkit-appearance: none;
   width: 130px;
-  height: 3px;
+  height: 4px;
   border-radius: 2px;
   background: linear-gradient(90deg, var(--primary), var(--secondary));
   outline: none;
@@ -585,21 +614,16 @@ canvas {
 }
 #controls input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: var(--primary);
   border: 2px solid var(--bg-deep);
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.6);
+  transition: transform 0.15s;
 }
-#controls input[type=range]::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: var(--primary);
-  border: 2px solid var(--bg-deep);
-  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
-  cursor: pointer;
+#controls input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
 }
 .ctrl-val {
   font-family: 'JetBrains Mono', monospace;
@@ -616,21 +640,27 @@ canvas {
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.05em;
-  padding: 6px 11px;
+  min-height: 32px;
+  padding: 6px 12px;
   border-radius: 0.5rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
   text-transform: uppercase;
 }
 .ctrl-btn:hover {
   background: hsla(0, 0%, 100%, 0.08);
   border-color: var(--primary);
   color: var(--text-primary);
+  transform: translateY(-1px);
+}
+.ctrl-btn:active {
+  transform: scale(0.97);
 }
 .ctrl-btn.active {
   background: rgba(59, 130, 246, 0.18);
   border-color: var(--primary);
   color: var(--primary);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.25);
 }
 
 /* ─── Bottom Right Quick Hint ─── */
@@ -648,15 +678,15 @@ canvas {
 #hint kbd {
   font-family: 'JetBrains Mono', monospace;
   font-size: 9px;
-  padding: 2px 5px;
-  border-radius: 3px;
+  padding: 2px 6px;
+  border-radius: 4px;
   background: hsla(0, 0%, 100%, 0.06);
   border: 1px solid hsla(0, 0%, 100%, 0.1);
   color: var(--text-secondary);
   margin: 0 1px;
 }
 
-/* ─── 3D Labels ─── */
+/* ─── 3D Screen Labels ─── */
 .body-label {
   position: absolute;
   pointer-events: none;
@@ -665,8 +695,8 @@ canvas {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(226, 232, 240, 0.6);
-  text-shadow: 0 0 8px rgba(0, 0, 0, 0.9);
+  color: rgba(226, 232, 240, 0.7);
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.95);
   z-index: 50;
   white-space: nowrap;
   transition: opacity 0.3s;

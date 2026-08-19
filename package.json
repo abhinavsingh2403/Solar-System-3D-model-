@@ -1,0 +1,19 @@
+{
+  "name": "cosmos-observatory-3d",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Ultra-realistic 3D Solar System & Relativistic Cosmos Simulation engineered with Three.js, custom GLSL shaders, and astrodynamics.",
+  "scripts": {
+    "dev": "python -m http.server 3334"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.4.7",
+    "lucide-react": "^1.16.0",
+    "tailwind-merge": "^3.0.1",
+    "three": "^0.128.0"
+  },
+  "devDependencies": {
+    "@types/three": "^0.128.0"
+  }
+}
